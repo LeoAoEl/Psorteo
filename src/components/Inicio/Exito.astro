@@ -1,0 +1,42 @@
+---
+import Container from "@components/shared/Container.astro";
+import { Image } from "astro:assets";
+import image from "@assets/billetes.avif";
+import { Icon } from "astro-icon/components";
+---
+
+<Container>
+  <div class="flex flex-col justify-center items-center mb-10">
+    <span class="text-4xl text-primary font-bold uppercase"
+      >Casos de exito
+    </span>
+
+    <span class="text-2xl text-primary uppercase -mt-2"
+      >Tú puedes ser el siguiente</span
+    >
+  </div>
+
+  <div
+    class="bg-primary text-black flex flex-col-reverse md:flex-row justify-between rounded-xl"
+  >
+    <div class="flex flex-col items-center gap-2 p-6 md:w-3/4 justify-center">
+      <span class="font-bold text-2xl"> 2do. Premio </span>
+      <span class="font-extrabold text-2xl">$𝟏𝟎,𝟎𝟎𝟎 𝐏𝐄𝐒𝐎𝐒 </span>
+      <p class="prose-2xl text-center">
+        Participa, tu podrias ser el siguiente ganador
+      </p>
+      <div>
+        <a
+          href="/exito"
+          class="bg-secondary max-w-screen-sm mx-auto flex text-center flex-row items-center justify-center gap-4 text-white font-bold py-2 px-4 prose rounded-2xl md:prose-2xl hover:scale-105 transition-all ease-in"
+        >
+          Casos de exito
+          <Icon name={"money"} size={32} />
+        </a>
+      </div>
+    </div>
+    <div class="md:w-2/5 h-full flex items-center justify-center">
+      <Image src={image} alt="billetes" class="rounded-tr-xl rounded-br-xl" />
+    </div>
+  </div>
+</Container>

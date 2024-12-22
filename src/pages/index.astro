@@ -1,0 +1,23 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HeroSwipper from "@components/Inicio/HeroSwipper";
+import { hero } from "@constants/homeSlider";
+import SmallBanner from "@components/Inicio/SmallBanner.astro";
+import BoletosButtons from "@components/Inicio/BoletosButtons.astro";
+import Steps from "@components/Inicio/Steps.astro";
+import Steps2 from "@components/Inicio/Steps2.astro";
+import Exito from "@components/Inicio/Exito.astro";
+import BannerBottom from "@components/Inicio/BannerBottom.astro";
+import Acordion from "@components/Inicio/Acordion";
+---
+
+<Layout>
+  <SmallBanner />
+  <HeroSwipper slides={hero} client:load />
+  <BoletosButtons />
+  <Steps />
+  <Steps2 />
+  <Exito />
+  <Acordion client:load />
+  <BannerBottom />
+</Layout>

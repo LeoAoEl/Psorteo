@@ -1,0 +1,35 @@
+---
+import Container from "@components/shared/Container.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import promo from "@assets/promo.avif";
+---
+
+<Container>
+  <div
+    class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 py-10"
+  >
+    <a
+      href="/boletos"
+      class="bg-primary text-black font-bold flex flex-row items-center justify-center gap-4 py-2 px-4 rounded-2xl prose md:prose-2xl hover:scale-105 transition-all ease-in"
+    >
+      <Icon name={"arrowR"} />
+      Escoge aquí tus boletos
+    </a>
+    <a
+      href="/boletos"
+      class="bg-secondary flex flex-row items-center justify-center gap-4 text-white font-bold py-2 px-4 rounded-2xl prose-2xl hover:scale-105 transition-all ease-in"
+    >
+      <Icon name={"search"} />
+      Consuta tus boletos</a
+    >
+  </div>
+
+  <section class="flex justify-center items-center">
+    <Image
+      src={promo}
+      alt="Promoción de boletos"
+      class="w-[75vh] rounded-xl shadow-lg"
+    />
+  </section>
+</Container>

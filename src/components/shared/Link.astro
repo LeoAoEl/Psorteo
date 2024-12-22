@@ -1,0 +1,32 @@
+---
+interface Props {
+  href: string;
+  name: string;
+}
+
+const { href, name } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Verificamos si la ruta actual coincide con el href proporcionado.
+const isActive = currentPath === href;
+---
+
+<li>
+  <a
+    class="text-primary mx-4 text-xl leading-tight truncate font-semibold"
+    aria-label={`Ruta a ${name}`}
+    href={href}
+  >
+    {name}
+  </a>
+  {
+    isActive ? (
+      <div
+        transition:name="menu-line"
+        class="border-b-4 md:mx-4 rounded-full border-primary transition-all ease-in"
+      />
+    ) : (
+      <div class="border-b-4 mx-4 border-transparent" />
+    )
+  }
+</li>

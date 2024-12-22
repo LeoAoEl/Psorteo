@@ -1,0 +1,37 @@
+---
+import Card from "./Card.astro";
+import { pasos } from "@constants/pasosBoletos";
+import Container from "@components/shared/Container.astro";
+import { Icon } from "astro-icon/components";
+import Dinamica from "./Dinamica.astro";
+---
+
+<Container>
+  <div class="flex justify-center items-center py-8">
+    <span class="text-4xl text-primary font-bold"
+      >Pasos para apartar tus boletos
+    </span>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {
+      pasos.map((paso) => (
+        <Card
+          title={paso.title}
+          description={paso.description}
+          icon={paso.icon}
+        />
+      ))
+    }
+  </div>
+
+  <div class="py-10">
+    <a
+      href="/boletos"
+      class="bg-secondary max-w-screen-sm mx-auto flex text-center flex-row items-center justify-center gap-4 text-white font-bold py-2 px-4 prose rounded-2xl md:prose-2xl hover:scale-105 transition-all ease-in"
+    >
+      <Icon name={"search"} size={32} />
+      Escoge aquí tus boletos</a
+    >
+  </div>
+  <Dinamica />
+</Container>

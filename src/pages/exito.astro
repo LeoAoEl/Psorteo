@@ -1,0 +1,30 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/shared/Container.astro";
+import { ganadores } from "@constants/exito/ganadores";
+import ExitoCard from "@components/exito/exitoCard.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout>
+  <Container>
+    <div class="flex flex-col justify-center items-center mb-10">
+      <span class="text-4xl text-primary font-bold uppercase"
+        >GRAN PRIMERA EDICION #1
+      </span>
+      <span class="text-2xl text-primary uppercase -mt-2"
+        >Tu podrias ser el proximo
+      </span>
+      <a
+        href="/evento"
+        class="bg-secondary max-w-screen-sm mx-auto mt-6 flex text-center flex-row items-center justify-center gap-4 text-white font-bold py-2 px-4 prose rounded-2xl md:prose-2xl hover:scale-105 transition-all ease-in"
+      >
+        Apartar boletos
+        <Icon name={"ticket"} size={32} />
+      </a>
+    </div>
+    <main class="gap-8 flex flex-col">
+      {ganadores.map((ganador) => <ExitoCard {...ganador} />)}
+    </main>
+  </Container>
+</Layout>

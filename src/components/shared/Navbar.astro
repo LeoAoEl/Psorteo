@@ -1,0 +1,67 @@
+---
+import { Astronav, MenuIcon, MenuItems, StickyHeader } from "astro-navbar";
+import Link from "./Link.astro";
+import Container from "./Container.astro";
+import { Image } from "astro:assets";
+import logo2 from "@assets/fav.webp";
+---
+
+<StickyHeader
+  class="gap-6 z-20 transition-all w-full ease-in-out bg-aFondo top-0"
+  scrollY={50}
+>
+  <Container>
+    <Astronav closeOnClick>
+      <div
+        class="flex justify-center items-center flex-col lg:flex-row relative w-full"
+      >
+        <div class="block lg:hidden">
+          <div class="flex justify-between items-center w-full gap-4">
+            <a href="/" class="flex flex-row items-center">
+              <Image src={logo2} alt="Logo" class="w-16 h-auto" />
+              <div
+                class="text-center text-primary flex flex-col font-bold prose-2xl ml-2"
+              >
+                <span>Sorteo</span>
+                <span class="-mt-5">Colimense</span>
+              </div>
+            </a>
+            <MenuIcon class="w-6 h-6 text-primary" />
+          </div>
+        </div>
+        <MenuItems
+          class="hidden lg:flex lg:items-center lg:w-auto py-10 md:py-0"
+        >
+          <ul
+            class="flex flex-col lg:flex-row gap-10 items-center mt-4 md:mt-0 justify-center"
+          >
+            <Link href="/" name="Inicio" />
+            <Link href="/evento" name="Ver sorteo" />
+            <li class="hidden lg:block">
+              <a
+                href="/"
+                class="flex flex-row items-center transition-all hover:scale-105 ease-in-out mx-8 ml-16"
+              >
+                <Image src={logo2} alt="Logo" class="w-16 h-auto" />
+                <div
+                  class="text-center text-primary flex flex-col font-bold prose-2xl"
+                >
+                  <span>Sorteo</span>
+                  <span class="-mt-5">Colimense</span>
+                </div>
+              </a>
+            </li>
+            <Link href="/nosotros" name="Nosotros" />
+            <Link href="/pago" name="Metodos de pago" />
+          </ul>
+        </MenuItems>
+      </div>
+    </Astronav>
+  </Container>
+</StickyHeader>
+
+<style is:global>
+  .astronav-dropdown:hover .dropdown-toggle {
+    display: block;
+  }
+</style>

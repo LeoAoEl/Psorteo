@@ -1,0 +1,34 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/shared/Container.astro";
+import { Image } from "astro:assets";
+import aboutUs from "@assets/asw.avif";
+---
+
+<Layout>
+  <Container>
+    <div class="flex flex-col justify-center items-center mb-4">
+      <span class="text-4xl text-primary font-bold uppercase"
+        >¿Quiénes somos?
+      </span>
+    </div>
+
+    <div
+      class="py-10 flex flex-col-reverse md:flex-row items-center justify-center gap-8"
+    >
+      <p class="prose-2xl text-white">
+        Somos un Equipo dedicado a llevar el éxito a nuestra comunidad por medio
+        de Rifas entre amigos, desde el año 2019 realizando responsable y
+        transparentemente, Rifas entre amigos basados en LNM. Con más de 66
+        Ediciones Realizadas con transmisiónes En Vivo. Actualmente somos una
+        comunidad de más de 395,000 Seguidores en Facebook como SORTEOS
+        Colimense, TRÉBOL Colimense y RIFAS ENTRE AMIGOS Colimense.
+      </p>
+      <Image
+        src={aboutUs}
+        alt={"acerca de nosotros"}
+        class={" rounded-xl w-[75vh]"}
+      />
+    </div>
+  </Container>
+</Layout>
