@@ -10,7 +10,7 @@ import logo2 from "@assets/volcanes.avif";
   class="gap-6 z-20 transition-all w-full ease-in-out bg-aFondo top-0"
   scrollY={50}
 >
-  <Container>
+  <div class="max-w-screen-xl mx-auto px-8 md:px-10 leading-tight">
     <Astronav closeOnClick>
       <div
         class="flex justify-center items-center flex-col lg:flex-row relative w-full"
@@ -30,7 +30,7 @@ import logo2 from "@assets/volcanes.avif";
           </div>
         </div>
         <MenuItems
-          class="hidden lg:flex lg:items-center lg:w-auto py-10 md:py-0"
+          class="hidden lg:flex lg:items-center lg:w-auto py-4 md:py-0"
         >
           <ul
             class="flex flex-col lg:flex-row gap-10 items-center mt-4 md:mt-0 justify-center"
@@ -57,7 +57,7 @@ import logo2 from "@assets/volcanes.avif";
         </MenuItems>
       </div>
     </Astronav>
-  </Container>
+  </div>
 </StickyHeader>
 
 <style is:global>
