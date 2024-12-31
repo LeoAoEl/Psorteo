@@ -7,16 +7,14 @@ import { ticket } from "@constants/evento/ticket";
 
 <Layout>
   <Container>
-    <div
-      class="flex flex-col justify-center items-center mb-4 py-10 text-center"
-    >
+    <div class="flex flex-col justify-center items-center mb-4">
       <span class="text-4xl text-primary font-bold uppercase"
-        >Elige una opción
+        >Elije una opción
       </span>
     </div>
 
     <main
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-6"
+      class="grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 items-center justify-center gap-6"
     >
       {
         ticket.map((item) => (
@@ -24,7 +22,7 @@ import { ticket } from "@constants/evento/ticket";
             <div class="flex flex-row justify-center items-center">
               <Icon name="right" size={24} />
               <span class="text-lg md:text-2xl text-black font-bold uppercase md:mr-4">
-                Numeros: {item.number}
+                {item.number} Numeros
               </span>
               <Icon name="ticketBlack" size={24} />
               <span class="text-lg text-black">{item.price}</span>

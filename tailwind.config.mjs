@@ -9,10 +9,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#ffbc04",
-        secondary: "#309c34",
-        fondo: "#303030",
-        aFondo: "#282424",
+        primary: "#FF7F11",
+        secondary: "#FFC300",
+        fondo: "#1E1E1E",
+        aFondo: "#292524",
       },
     },
   },
