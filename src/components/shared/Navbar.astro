@@ -3,7 +3,7 @@ import { Astronav, MenuIcon, MenuItems, StickyHeader } from "astro-navbar";
 import Link from "./Link.astro";
 import Container from "./Container.astro";
 import { Image } from "astro:assets";
-import logo2 from "@assets/fav.webp";
+import logo2 from "@assets/volcanes.avif";
 ---
 
 <StickyHeader
@@ -18,12 +18,12 @@ import logo2 from "@assets/fav.webp";
         <div class="block lg:hidden">
           <div class="flex justify-between items-center w-full gap-4">
             <a href="/" class="flex flex-row items-center">
-              <Image src={logo2} alt="Logo" class="w-16 h-auto" />
+              <Image src={logo2} alt="Logo" class="w-24 h-auto" />
               <div
-                class="text-center text-primary flex flex-col font-bold prose-2xl ml-2"
+                class="text-center text-primary flex flex-col font-bold prose-lg ml-2"
               >
-                <span>Sorteo</span>
-                <span class="-mt-5">los Volcanes</span>
+                <span>Sorteo los</span>
+                <span class="-mt-5"> Volcanes</span>
               </div>
             </a>
             <MenuIcon class="w-6 h-6 text-primary" />
@@ -42,7 +42,7 @@ import logo2 from "@assets/fav.webp";
                 href="/"
                 class="flex flex-row items-center transition-all hover:scale-105 ease-in-out mx-8 ml-16"
               >
-                <Image src={logo2} alt="Logo" class="w-16 h-auto" />
+                <Image src={logo2} alt="Logo" class="w-32 h-auto" />
                 <div
                   class="text-center text-primary flex flex-col font-bold prose-2xl"
                 >
