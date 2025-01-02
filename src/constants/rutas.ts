@@ -1,10 +1,10 @@
 export const navbarRoutes = [
   { name: "Inicio", path: "/" },
-  { name: "Consula boletos", path: "/consulta" },
-  { name: "Ver sorteo", path: "/sorteo" },
-  // { name: "Casos de exito", path: "/exito" },
-  { name: "Metodos de pago", path: "/pago" },
-  { name: "Nosotros", path: "/nosotros" },
+  { name: "Consula boletos", path: "/consulta/" },
+  { name: "Ver sorteo", path: "/sorteo/" },
+  // { name: "Casos de exito", path: "/exito/" },
+  { name: "Metodos de pago", path: "/pago/" },
+  { name: "Nosotros", path: "/nosotros/" },
 ];
 
 export const socialLinks = [
