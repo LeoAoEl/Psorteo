@@ -1,9 +1,9 @@
 ---
 import { Astronav, MenuIcon, MenuItems, StickyHeader } from "astro-navbar";
 import Link from "./Link.astro";
+import Container from "./Container.astro";
 import { Image } from "astro:assets";
 import logo2 from "@assets/volcanes.avif";
-import { navbarRoutes } from "@constants/rutas";
 ---
 
 <StickyHeader
@@ -13,17 +13,12 @@ import { navbarRoutes } from "@constants/rutas";
   <div class="max-w-screen-xl mx-auto px-8 md:px-10 leading-tight">
     <Astronav closeOnClick>
       <div
-        class="flex justify-between items-center flex-col lg:flex-row relative w-full"
+        class="flex justify-center items-center flex-col lg:flex-row relative w-full"
       >
-        <div>
+        <div class="block lg:hidden">
           <div class="flex justify-between items-center w-full gap-4">
             <a href="/" class="flex flex-row items-center">
-              <Image
-                src={logo2}
-                alt="Logo"
-                class="w-24 h-auto"
-                loading={"eager"}
-              />
+              <Image src={logo2} alt="Logo" class="w-24 h-auto" />
               <div
                 class="text-center text-primary flex flex-col font-bold prose-lg ml-2"
               >
@@ -31,22 +26,33 @@ import { navbarRoutes } from "@constants/rutas";
                 <span class="-mt-5"> Volcanes</span>
               </div>
             </a>
-            <div class="block md:hidden">
-              <MenuIcon class="w-6 h-6 text-primary" />
-            </div>
+            <MenuIcon class="w-6 h-6 text-primary" />
           </div>
         </div>
         <MenuItems
           class="hidden lg:flex lg:items-center lg:w-auto py-4 md:py-0"
         >
           <ul
-            class="flex flex-col lg:flex-row md:gap-0 gap-10 items-center mt-4 md:mt-0 justify-center"
+            class="flex flex-col lg:flex-row gap-10 items-center mt-4 md:mt-0 justify-center"
           >
-            {
-              navbarRoutes.map(({ path, name }) => (
-                <Link href={path} name={name} />
-              ))
-            }
+            <Link href="/" name="Inicio" />
+            <Link href="/sorteo" name="Ver sorteo" />
+            <li class="hidden lg:block">
+              <a
+                href="/"
+                class="flex flex-row items-center transition-all hover:scale-105 ease-in-out mx-8 ml-16"
+              >
+                <Image src={logo2} alt="Logo" class="w-32 h-auto" />
+                <div
+                  class="text-center text-primary flex flex-col font-bold prose-2xl"
+                >
+                  <span>Sorteo los</span>
+                  <span class="-mt-5"> Volcanes</span>
+                </div>
+              </a>
+            </li>
+            <Link href="/nosotros" name="Nosotros" />
+            <Link href="/pago" name="Metodos de pago" />
           </ul>
         </MenuItems>
       </div>

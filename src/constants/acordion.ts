@@ -1,5 +1,3 @@
-import { desc } from "framer-motion/client";
-
 export const acordion = [
   {
     title: "¿Qué probabilidades tengo de ganar?",

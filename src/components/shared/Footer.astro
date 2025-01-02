@@ -1,20 +1,7 @@
 ---
-import { Image } from "astro:assets";
-import logo from "@assets/logo.webp";
 import Container from "./Container.astro";
-
-const socialLinks = [
-  { name: "Facebook Sorteo Colimense", url: "#" },
-  { name: "Facebook Trébol Colimense", url: "#" },
-  { name: "Instagram", url: "#" },
-];
-
-const whatsappLines = [
-  "Línea de contacto #1",
-  "Línea de contacto #2",
-  "Línea de contacto #3",
-  "Línea de contacto #4",
-];
+import { Icon } from "astro-icon/components";
+import { socialLinks, whatsappLines } from "@constants/rutas";
 ---
 
 <footer class="bg-aFondo text-white py-6 md:py-8">
@@ -24,13 +11,18 @@ const whatsappLines = [
       <h3 class="text-primary font-semibold text-lg mb-4">
         Nuestras redes sociales
       </h3>
-      <ul>
+      <ul
+        class="flex flex-col gap-4 justify-center items-center md:items-start"
+      >
         {
           socialLinks.map((link) => (
-            <li>
+            <li class=" flex flex-row gap-2">
+              <Icon name={link.icon} size={24} />
               <a
+                target="_blank"
+                aria-label={link.name}
                 href={link.url}
-                class="hover:underline hover:underline-offset-4 hover:decoration-primary transition duration-200"
+                class="hover:underline hover:underline-offset-4 capitalize hover:decoration-primary transition duration-200"
               >
                 {link.name}
               </a>
@@ -42,7 +34,9 @@ const whatsappLines = [
 
     <!-- Descripción -->
     <div class="text-center">
-      <h3 class="text-primary font-semibold text-lg mb-4">Trébol Colimense</h3>
+      <h3 class="text-primary font-semibold text-lg mb-4">
+        Sorteo los Volcanes
+      </h3>
       <p class="mb-4">
         Somos un equipo dedicado a rifas entre amigos, desde el año 2019,
         teniendo hasta el día de hoy una comunidad de más de 70 mil seguidores
@@ -61,8 +55,24 @@ const whatsappLines = [
       <h3 class="text-primary font-semibold text-lg mb-4">
         Líneas de WhatsApp
       </h3>
-      <ul>
-        {whatsappLines.map((line, index) => <li>{line}</li>)}
+      <ul
+        class="flex flex-col gap-4 md:gap-2 justify-center items-center md:items-end"
+      >
+        {
+          whatsappLines.map((link) => (
+            <li class=" flex flex-row gap-2">
+              <a
+                target="_blank"
+                aria-label={link.icon}
+                href={link.path}
+                class="hover:underline hover:underline-offset-4 capitalize hover:decoration-primary transition duration-200"
+              >
+                {link.name}
+              </a>
+              <Icon name={link.icon} size={24} />
+            </li>
+          ))
+        }
       </ul>
     </div>
   </Container>

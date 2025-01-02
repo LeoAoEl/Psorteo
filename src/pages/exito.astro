@@ -4,9 +4,11 @@ import Container from "@components/shared/Container.astro";
 import { ganadores } from "@constants/exito/ganadores";
 import ExitoCard from "@components/exito/exitoCard.astro";
 import { Icon } from "astro-icon/components";
+import { seoConfig } from "@constants/SEO";
+const { title, description, keywords } = seoConfig.exito;
 ---
 
-<Layout>
+<Layout title={title} description={description} keywords={keywords}>
   <Container>
     <div class="flex flex-col justify-center items-center mb-10">
       <span class="text-4xl text-primary font-bold uppercase"
@@ -16,7 +18,7 @@ import { Icon } from "astro-icon/components";
         >Tu podrias ser el proximo
       </span>
       <a
-        href="/evento"
+        href="/sorteo"
         class="bg-secondary max-w-screen-sm mx-auto mt-6 flex text-center flex-row items-center justify-center gap-4 text-white font-bold py-2 px-4 prose rounded-2xl md:prose-2xl hover:scale-105 transition-all ease-in"
       >
         Apartar boletos

@@ -9,9 +9,11 @@ import Steps2 from "@components/Inicio/Steps2.astro";
 import Exito from "@components/Inicio/Exito.astro";
 import BannerBottom from "@components/Inicio/BannerBottom.astro";
 import Acordion from "@components/Inicio/Acordion";
+import { seoConfig } from "@constants/SEO";
+const { title, description, keywords } = seoConfig.inicio;
 ---
 
-<Layout>
+<Layout title={title} description={description} keywords={keywords}>
   <SmallBanner />
   <HeroSwipper slides={hero} client:load />
   <BoletosButtons />

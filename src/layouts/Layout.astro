@@ -2,6 +2,18 @@
 import Navbar from "@components/shared/Navbar.astro";
 import Footer from "@components/shared/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+import ScrollToTop from "@components/shared/ScrollTop";
+import { seoConfig } from "@constants/SEO";
+
+const { default: seoDfeault, inicio } = seoConfig;
+
+interface Props {
+  title: string;
+  keywords?: string;
+  description?: string;
+}
+
+const { title, description, keywords } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,8 +23,26 @@ import { ClientRouter } from "astro:transitions";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/volcanes.webp" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content={seoDfeault.author} />
+
+    <!-- Meta Tags SEO -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <title>{title} - Sorteo los Volcanes</title>
+
+    <!-- Meta Tags Open Graph (OG) -->
+    <meta property="og:title" content={inicio.title} />
+    <meta property="og:description" content={inicio.description} />
+    <meta property="og:image" content={seoDfeault.image} />
+    <meta property="og:url" content={seoDfeault.url} />
+    <meta property="og:type" content="website" />
+
+    <!-- Meta Tags para Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={inicio.title} />
+    <meta name="twitter:description" content={inicio.description} />
+    <meta name="twitter:image" content={seoDfeault.image} />
     <ClientRouter />
-    <title>Sorteo los Volcanes</title>
   </head>
   <body class="bg-fondo scroll-smooth">
     <Navbar />
@@ -20,5 +50,6 @@ import { ClientRouter } from "astro:transitions";
       <slot />
     </main>
     <Footer />
+    <ScrollToTop client:load />
   </body>
 </html>
