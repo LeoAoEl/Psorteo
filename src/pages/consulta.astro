@@ -1,20 +1,21 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/shared/Container.astro";
-import Formulario from "@components/boletos/Formulario";
+import ConsultaForm from "@components/consulta/ConsultaForm";
 import { seoConfig } from "@constants/SEO";
 const { title, description, keywords } = seoConfig.consulta;
+import { ticket, correo } from "@constants/consulta/consulaRes";
 ---
 
 <Layout title={title} description={description} keywords={keywords}>
   <Container>
-    <div class="flex flex-col justify-center items-center mb-4 text-center">
-      <span class="text-4xl text-primary font-bold max-w-4xl"
+    <div class="flex flex-col justify-center items-center text-center pb-4">
+      <span class="text-3xl md:text-4xl text-primary font-bold max-w-4xl"
         >Busca tus boletos apartados y pagados en la gran PRIMERA EDICION #1
       </span>
     </div>
     <div
-      class="text-primary text-center flex flex-col justify-center items-center prose-xl md:max-w-2xl mx-auto pt-10"
+      class="text-primary text-center flex flex-col justify-center items-center prose-lg md:prose-xl md:max-w-2xl mx-auto"
     >
       <p>
         Encuentra los boletos que has apartado durante la actual rifa, y mira
@@ -22,7 +23,7 @@ const { title, description, keywords } = seoConfig.consulta;
       </p>
     </div>
     <main class="pb-10 pt-4">
-      <Formulario client:load />
+      <ConsultaForm tickets={ticket} email={correo} client:visible />
     </main>
   </Container>
 </Layout>
