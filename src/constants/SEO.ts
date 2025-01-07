@@ -1,6 +1,6 @@
 export const seoConfig = {
   default: {
-    url: "https://www.sorteolosvolcanes.com",
+    url: "https://www.sorteoelnevado.com",
     image: "/volcanes.webp",
     author: "Mavalos",
   },

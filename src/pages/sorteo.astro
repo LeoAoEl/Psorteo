@@ -9,14 +9,14 @@ const { title, description, keywords } = seoConfig.sorteo;
 
 <Layout title={title} description={description} keywords={keywords}>
   <Container>
-    <div class="flex flex-col justify-center items-center mb-4">
-      <span class="text-4xl text-primary font-bold uppercase"
+    <div class="flex flex-col justify-center items-center text-center pb-4">
+      <span class="text-3xl md:text-4xl text-primary font-bold uppercase"
         >Elije una opción
       </span>
     </div>
 
     <main
-      class="grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 items-center justify-center gap-6"
+      class="grid grid-cols-1 md:grid-cols-2 mt-6 md:mt-4 lg:grid-cols-3 items-center justify-center gap-6"
     >
       {
         ticket.map((item) => (

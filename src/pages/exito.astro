@@ -10,22 +10,22 @@ const { title, description, keywords } = seoConfig.exito;
 
 <Layout title={title} description={description} keywords={keywords}>
   <Container>
-    <div class="flex flex-col justify-center items-center mb-10">
-      <span class="text-4xl text-primary font-bold uppercase"
+    <div class="flex flex-col justify-center items-center text-center pb-4">
+      <span class="text-3xl md:text-4xl text-primary font-bold uppercase"
         >GRAN PRIMERA EDICION #1
       </span>
       <span class="text-2xl text-primary uppercase -mt-2"
         >Tu podrias ser el proximo
       </span>
       <a
-        href="/sorteo"
+        href="/sorteo/"
         class="bg-secondary max-w-screen-sm mx-auto mt-6 flex text-center flex-row items-center justify-center gap-4 text-white font-bold py-2 px-4 prose rounded-2xl md:prose-2xl hover:scale-105 transition-all ease-in"
       >
         Apartar boletos
         <Icon name={"ticket"} size={32} />
       </a>
     </div>
-    <main class="gap-8 flex flex-col">
+    <main class="gap-8 flex flex-col mt-4">
       {ganadores.map((ganador) => <ExitoCard {...ganador} />)}
     </main>
   </Container>
