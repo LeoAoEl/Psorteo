@@ -1,15 +1,15 @@
 export const navbarRoutes = [
   { name: "Inicio", path: "/" },
-  { name: "Consula boletos", path: "/consulta/" },
   { name: "Ver sorteo", path: "/sorteo/" },
-  // { name: "Casos de exito", path: "/exito/" },
   { name: "Metodos de pago", path: "/pago/" },
+  { name: "Consula boletos", path: "/consulta/" },
+  // { name: "Casos de exito", path: "/exito/" },
   { name: "Nosotros", path: "/nosotros/" },
 ];
 
 export const socialLinks = [
-  { name: "Facebook Sorteo los volcanes", url: "#", icon: "facebook" },
-  { name: "instagram Sorteo los volcanes", url: "#", icon: "instagram" },
+  { name: "Facebook Sorteo el Nevado", url: "#", icon: "facebook" },
+  { name: "instagram Sorteo el Nevado", url: "#", icon: "instagram" },
 ];
 
 export const whatsappLines = [
