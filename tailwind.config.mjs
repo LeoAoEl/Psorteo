@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { nextui } = require("@nextui-org/react");
+const { nextui, colors } = require("@nextui-org/react");
 
 export default {
   content: [
@@ -9,10 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#FF7F11",
-        secondary: "#FFC300",
-        fondo: "#1E1E1E",
-        aFondo: "#292524",
+        primary: "#FF9B2D",
+        secondary: "#FFC85B",
+        fondo: "#0D2B3E",
+        aFondo: "#09202F",
+        detalle: "#316A55",
       },
     },
   },

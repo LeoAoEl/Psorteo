@@ -10,21 +10,17 @@ import Exito from "@components/Inicio/Exito.astro";
 import BannerBottom from "@components/Inicio/BannerBottom.astro";
 import Acordion from "@components/Inicio/Acordion";
 import { seoConfig } from "@constants/SEO";
+
 const { title, description, keywords } = seoConfig.inicio;
-import CountDown from "@components/exito/CountDown";
-import PrizesCarousel from "@components/exito/PrizesCarousel";
-import { prizes } from "@constants/exito/prizes";
 ---
 
 <Layout title={title} description={description} keywords={keywords}>
-  <CountDown client:load />
-  <PrizesCarousel items={prizes} client:load />
   <SmallBanner />
   <HeroSwipper slides={hero} client:load />
   <BoletosButtons />
   <Steps />
   <Steps2 />
   <Exito />
-  <Acordion client:load />
+  <Acordion client:visible />
   <BannerBottom />
 </Layout>

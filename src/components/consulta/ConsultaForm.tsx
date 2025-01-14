@@ -22,11 +22,11 @@ interface ConsultaFormProps {
 
 export default function ConsultaForm({ tickets }: ConsultaFormProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [inputEmail, setInputEmail] = useState(""); // El correo introducido por el usuario
-  const [modalEmail, setModalEmail] = useState(""); // El correo que se mostrará en el modal
+  const [inputEmail, setInputEmail] = useState("");
+  const [modalEmail, setModalEmail] = useState("");
 
   const handleOpenModal = () => {
-    setModalEmail(inputEmail); // Establecer el correo actual al abrir el modal
+    setModalEmail(inputEmail);
     setIsModalOpen(true);
   };
 
