@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useBoletos } from "@hooks/userConsultaBoletos";
 import {
   Button,
@@ -50,10 +50,11 @@ export default function ConsultaForm() {
       </div>
 
       <Modal
+        scrollBehavior={"inside"}
         backdrop="blur"
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        size="3xl"
+        size="4xl"
       >
         <ModalContent className="bg-fondo text-white">
           <ModalHeader className="text-2xl flex flex-col items-center justify-center">
@@ -65,24 +66,24 @@ export default function ConsultaForm() {
               {isLoading ? (
                 <p className="text-center">Cargando boletos...</p>
               ) : boletos.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 items-center justify-center text-center lg:grid-cols-4 gap-2 md:gap-6">
                   {boletos.map((boleto) => (
                     <div
                       key={boleto.id}
-                      className={`p-4 rounded-lg shadow ${
+                      className={`p-6  rounded-lg shadow-md ${
                         boleto.estado === "apartado"
-                          ? "bg-green-100"
-                          : "bg-yellow-100"
+                          ? "bg-orange-700 "
+                          : "bg-blue-900"
                       }`}
                     >
-                      <p className="text-lg font-semibold text-slate-800">
+                      <p className="text-lg md:text-2xl font-semibold text-slate-200 ">
                         Nº {boleto.numero_boleto}
                       </p>
                       <p
-                        className={`text-sm ${
+                        className={`text-sm  ${
                           boleto.estado === "confirmado"
-                            ? "text-green-700"
-                            : "text-yellow-700"
+                            ? " text-slate-200"
+                            : "text-slate-200"
                         }`}
                       >
                         {boleto.estado.charAt(0).toUpperCase() +
