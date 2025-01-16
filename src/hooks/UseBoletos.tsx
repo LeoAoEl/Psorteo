@@ -16,10 +16,10 @@ export function useBoletos() {
         "http://localhost:5000/sorteos/activo"
       );
       // TODO: Filtrar boletos: Solo Libres y Confirmados
-      const boletosFiltrados = response.data.boletos.filter(
-        (boleto) => boleto.estado === "libre" || boleto.estado === "confirmado"
-      );
-      setBoletos(boletosFiltrados);
+      // const boletosFiltrados = response.data.boletos.filter(
+      //   (boleto) => boleto.estado === "libre" || boleto.estado === "confirmado"
+      // );
+      setBoletos(response.data.boletos);
       setSorteoActivo(response.data.sorteo);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response?.status === 404) {
