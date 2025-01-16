@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 interface SelectorBoletosProps {
   boletos: { id: number; estado: "libre" | "apartado" | "confirmado" }[];
@@ -17,7 +18,11 @@ export default function SelectorBoletos({
     } else if (boletosSeleccionados.length < 10) {
       setBoletosSeleccionados((prev) => [...prev, id]);
     } else {
-      alert("No puedes seleccionar más de 10 boletos");
+      toast.warning("No puedes seleccionar más de 10 boletos", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
     }
   };
 
@@ -28,7 +33,7 @@ export default function SelectorBoletos({
           ? "bg-blue-500 text-white"
           : "bg-green-200 hover:bg-green-300";
       case "apartado":
-        return "bg-primary cursor-not-allowed";
+        return "bg-yellow-200 cursor-not-allowed";
       case "confirmado":
         return "bg-gray-300 cursor-not-allowed opacity-50";
       default:
@@ -38,24 +43,24 @@ export default function SelectorBoletos({
 
   return (
     <div className="mb-6">
-      <h2 className="text-xl font-semibold mb-2 text-slate-200">
+      <h2 className=" text-slate-200 text-xl font-semibold mb-2">
         Selección de Boletos
       </h2>
-      <div className="flex justify-center md:justify-start space-x-4 mb-4 text-slate-200">
+      <div className="flex justify-center space-x-4 mb-4 gap-8 text-slate-200 text-lg">
         <div className="flex items-center">
           <div className="w-4 h-4 bg-green-200 mr-2"></div>
           <span>Libre</span>
         </div>
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <div className="w-4 h-4 bg-yellow-200 mr-2"></div>
           <span>Apartado</span>
-        </div>
+        </div> */}
         <div className="flex items-center">
           <div className="w-4 h-4 bg-gray-300 mr-2"></div>
           <span>Confirmado</span>
         </div>
       </div>
-      <div className="grid grid-cols-4 md:grid-cols-10 gap-2 mb-4">
+      <div className="grid md:grid-cols-8 grid-cols-4 lg:grid-cols-10 gap-2 mb-4">
         {boletos.map((boleto) => (
           <button
             key={boleto.id}

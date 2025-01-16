@@ -1,5 +1,3 @@
-import React from "react";
-
 interface BoletosSeleccionadosProps {
   boletosSeleccionados: number[];
   deseleccionarBoleto: (id: number) => void;
@@ -17,9 +15,9 @@ export default function BoletosSeleccionados({
   let mensajeDescuento = "";
 
   if (cantidadBoletos >= 10) {
-    mensajeDescuento = "Se está aplicando un descuento del 20%";
+    mensajeDescuento = "Se está aplicando un descuento del 40%";
   } else if (cantidadBoletos >= 5) {
-    mensajeDescuento = "Se está aplicando un descuento del 10%";
+    mensajeDescuento = "Se está aplicando un descuento del 20%";
   }
 
   return (

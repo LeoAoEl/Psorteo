@@ -1,10 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/shared/Container.astro";
-import PrizesCarousel from "@components/sorteo/PrizesCarousel";
+
 import SorteoForm from "@components/sorteo/SorteoForm";
 import { seoConfig } from "@constants/SEO";
-import { prizes } from "@constants/exito/prizes";
 
 const { title, description, keywords } = seoConfig.sorteo;
 ---
@@ -17,12 +16,10 @@ const { title, description, keywords } = seoConfig.sorteo;
       </span>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-6 items-center justify-center">
+    <div
+      class="flex flex-col md:flex-row gap-6 items-center justify-center min-h-screen"
+    >
       <SorteoForm client:visible />
-    </div>
-
-    <div>
-      <PrizesCarousel items={prizes} client:visible />
     </div>
   </Container>
 </Layout>
