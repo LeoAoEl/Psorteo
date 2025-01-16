@@ -102,7 +102,7 @@ const WinnersSwiperCarousel: React.FC = () => {
         >
           {winners.map((winner) => (
             <SwiperSlide key={winner.id}>
-              <div className="bg-detalle rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ease-in-out transform cursor-pointer hover:scale-105">
+              <div className="bg-primary rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ease-in-out transform cursor-pointer hover:scale-105">
                 <div className="relative">
                   <img
                     src={winner.image}
@@ -114,10 +114,10 @@ const WinnersSwiperCarousel: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className=" font-thin text-2xl mb-2 text-slate-200">
+                  <h3 className=" font-thin text-2xl mb-2 text-slate-700">
                     {winner.name}
                   </h3>
-                  <p className="text-slate-200 text-lg">Ganó: {winner.prize}</p>
+                  <p className="text-slate-700 text-lg">Ganó: {winner.prize}</p>
                 </div>
               </div>
             </SwiperSlide>

@@ -1,7 +1,7 @@
 export const seoConfig = {
   default: {
     url: "https://www.sorteoelnevado.com",
-    image: "/volcanes.webp",
+    image: "/volcanes.avif",
     author: "Mavalos",
   },
   inicio: {

@@ -1,39 +1,37 @@
-export interface Ticket {
-  numero: string; // Número del boleto
-  estado: "libre" | "apartado" | "confirmado"; // Estado del boleto
+export interface Sorteo {
+  ID_SORTEO: number;
+  nombre: string;
+  isActive: number;
+  descripcion: string;
+  fecha_creacion: string;
 }
 
-// Props para el componente SelectedTickets
-export interface SelectedTicketsProps {
-  selectedTickets: Ticket[]; // Boletos seleccionados
+export interface Boleto {
+  ID_BOLETO: number;
+  ID_SORTEO: number;
+  numero_boleto: string;
+  estado: "libre" | "apartado" | "confirmado";
+  nombre: string | null;
+  celular: string | null;
+  correo: string | null;
+  fecha_apartado: string | null;
 }
 
-// Props para el componente SearchTickets
-export interface SearchTicketsProps {
-  tickets: Ticket[]; // Todos los boletos disponibles
-  selectedTickets: Ticket[]; // Boletos seleccionados
-  setSelectedTickets: React.Dispatch<React.SetStateAction<Ticket[]>>; // Función para actualizar los boletos seleccionados
+export interface DatosUsuario {
+  nombre: string;
+  correo: string;
+  telefono: string;
 }
 
-// Props para el componente TicketList
-export interface TicketListProps {
-  tickets: Ticket[]; // Todos los boletos disponibles
-  selectedTickets: Ticket[]; // Boletos seleccionados
-  maxTickets: number; // Máximo de boletos permitidos
-  setSelectedTickets: React.Dispatch<React.SetStateAction<Ticket[]>>; // Función para actualizar los boletos seleccionados
-  ticketsPerPage: number; // Cantidad de boletos por página
-  currentPage: number; // Página actual
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>; // Función para actualizar la página actual
+export interface SorteoResponse {
+  sorteo: Sorteo;
+  boletos: Boleto[];
 }
 
-// Props para el componente TicketForm
-export interface TicketFormProps {
-  maxTickets: number; // Máximo de boletos permitidos
-  price: number; // Precio total
-  tickets: Ticket[]; // Todos los boletos disponibles
+export interface ApartarBoletosResponse {
+  message: string;
 }
 
-// Props para el componente TicketModal
-export interface TicketModalProps {
-  tickets: Ticket[]; // Todos los boletos disponibles
+export interface ErrorResponse {
+  error: string;
 }

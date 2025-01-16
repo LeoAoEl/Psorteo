@@ -1,27 +1,26 @@
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import FormularioUsuario from "./FormularioUser";
 import SelectorBoletos from "./SelectorBoletos";
+import { useApartarBoletos } from "@hooks/UseApartarBoletos";
 import Ofertas from "./Ofertas";
 import ProcesoPago from "./Pago";
+import { useBoletos } from "@hooks/UseBoletos";
 import BoletosSeleccionados from "./BoletosSeleccionados";
 import BuscadorBoletos from "./BuscadorBoletos";
+import { type DatosUsuario } from "../../types/tickets";
 
-interface Boleto {
-  id: number;
-  estado: "libre" | "apartado" | "confirmado";
-}
+const DESCUENTO_5 = 0.2;
+const DESCUENTO_10 = 0.4;
 
-const PRECIO_BOLETO = 25;
-const DESCUENTO_5 = 0.1; // 10% de descuento
-const DESCUENTO_10 = 0.2; // 20% de descuento
-
-export default function SorteoForm() {
-  const [boletos, setBoletos] = useState<Boleto[]>([]);
+export default function Sorteo() {
+  const { boletos, sorteoActivo, isLoading, recargarBoletos } = useBoletos();
+  const { apartarBoletos, isApartando } = useApartarBoletos();
   const [boletosSeleccionados, setBoletosSeleccionados] = useState<number[]>(
     []
   );
-  const [datosUsuario, setDatosUsuario] = useState({
+  const [datosUsuario, setDatosUsuario] = useState<DatosUsuario>({
     nombre: "",
     correo: "",
     telefono: "",
@@ -29,40 +28,10 @@ export default function SorteoForm() {
   const [paginaActual, setPaginaActual] = useState(1);
   const boletosPerPage = 100;
 
-  useEffect(() => {
-    // Inicializar boletos (asumimos 1000 boletos)
-    setBoletos(
-      Array.from({ length: 60000 }, (_, i) => ({ id: i + 1, estado: "libre" }))
-    );
-  }, []);
-
-  const seleccionarBoletoAleatorio = (cantidad: number) => {
-    setBoletosSeleccionados([]); // Limpiar selecciones previas
-    const boletosLibres = boletos.filter((b) => b.estado === "libre");
-    if (boletosLibres.length < cantidad) {
-      toast.error("No hay suficientes boletos libres");
-      return;
-    }
-    const seleccionados = boletosLibres
-      .sort(() => 0.5 - Math.random())
-      .slice(0, cantidad)
-      .map((b) => b.id);
-    setBoletosSeleccionados(seleccionados);
-    actualizarEstadoBoletos(seleccionados, "apartado");
-  };
-
-  const actualizarEstadoBoletos = (
-    ids: number[],
-    estado: "libre" | "apartado" | "confirmado"
-  ) => {
-    setBoletos((prev) =>
-      prev.map((b) => (ids.includes(b.id) ? { ...b, estado } : b))
-    );
-  };
-
   const calcularPrecioTotal = () => {
+    if (!sorteoActivo) return { total: 0, descuento: 0 };
     const cantidad = boletosSeleccionados.length;
-    let precioBase = cantidad * PRECIO_BOLETO;
+    const precioBase = cantidad * 5; // Precio fijo por boleto
     let descuento = 0;
 
     if (cantidad >= 10) {
@@ -74,7 +43,7 @@ export default function SorteoForm() {
     return { total: precioBase - descuento, descuento };
   };
 
-  const confirmarCompra = () => {
+  const confirmarCompra = async () => {
     if (boletosSeleccionados.length === 0) {
       toast.error("Selecciona al menos un boleto");
       return;
@@ -87,67 +56,58 @@ export default function SorteoForm() {
       toast.error("Completa todos los datos del formulario");
       return;
     }
-    actualizarEstadoBoletos(boletosSeleccionados, "confirmado");
-    toast.success(
-      "¡Compra confirmada! Envía tu comprobante de pago por WhatsApp"
+
+    const success = await apartarBoletos(boletosSeleccionados, datosUsuario);
+    if (success) {
+      setBoletosSeleccionados([]);
+      recargarBoletos();
+    }
+  };
+
+  if (isLoading)
+    return <div className="text-center text-slate-200">Cargando sorteo...</div>;
+  if (!sorteoActivo)
+    return (
+      <div className="text-center text-slate-200">
+        No hay sorteos activos en este momento.
+      </div>
     );
-    // Aquí va a ir la logíca para enviar el asunto al back
-  };
 
-  const deseleccionarBoleto = (id: number) => {
-    setBoletosSeleccionados((prev) => prev.filter((b) => b !== id));
-    actualizarEstadoBoletos([id], "libre");
-  };
-
-  const boletosPaginados = boletos.slice(
-    (paginaActual - 1) * boletosPerPage,
-    paginaActual * boletosPerPage
-  );
+  const boletosPaginados = boletos
+    .slice((paginaActual - 1) * boletosPerPage, paginaActual * boletosPerPage)
+    .map((boleto) => ({
+      id: parseInt(boleto.numero_boleto),
+      estado: boleto.estado,
+    }));
 
   return (
     <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4 text-slate-200">
+        {sorteoActivo.nombre}
+      </h1>
       <FormularioUsuario setDatosUsuario={setDatosUsuario} />
       <Ofertas />
       <BuscadorBoletos
-        boletos={boletos}
+        boletos={boletos.map((b) => ({
+          id: parseInt(b.numero_boleto),
+          estado: b.estado,
+        }))}
         seleccionarBoleto={(id) => {
           if (!boletosSeleccionados.includes(id)) {
             setBoletosSeleccionados((prev) => [...prev, id]);
-            actualizarEstadoBoletos([id], "apartado");
           }
         }}
       />
-      <div className="flex space-x-2 flex-col md:flex-row mb-4 mx-auto items-center justify-center gap-8">
-        <button
-          onClick={() => seleccionarBoletoAleatorio(1)}
-          className="bg-primary text-slate-700 px-4 py-2 rounded hover:bg-primary/90"
-        >
-          1 Boleto aleatorio
-        </button>
-        <button
-          onClick={() => seleccionarBoletoAleatorio(5)}
-          className="bg-primary text-slate-700 px-4 py-2 rounded hover:bg-primary/90"
-        >
-          5 Boletos aleatorios
-        </button>
-        <button
-          onClick={() => seleccionarBoletoAleatorio(10)}
-          className="bg-primary text-slate-700 px-4 py-2 rounded hover:bg-primary/90"
-        >
-          10 Boletos aleatorios
-        </button>
-      </div>
       <SelectorBoletos
         boletos={boletosPaginados}
         boletosSeleccionados={boletosSeleccionados}
         setBoletosSeleccionados={setBoletosSeleccionados}
-        seleccionarBoletoAleatorio={seleccionarBoletoAleatorio}
       />
       <div className="flex justify-center mt-4 mb-6">
         <button
           onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
           disabled={paginaActual === 1}
-          className="bg-primary text-slate-700 px-4 py-2 rounded mr-2 disabled:opacity-50"
+          className="bg-primary text-slate-700 px-4 py-2 rounded mr-2 disabled:opacity-50 hover:bg-primary/90"
         >
           Anterior
         </button>
@@ -161,14 +121,16 @@ export default function SorteoForm() {
             )
           }
           disabled={paginaActual === Math.ceil(boletos.length / boletosPerPage)}
-          className="bg-primary text-slate-700 px-4 py-2 rounded ml-2 disabled:opacity-50"
+          className="bg-primary text-slate-700 px-4 py-2 rounded ml-2 disabled:opacity-50 hover:bg-primary/90"
         >
           Siguiente
         </button>
       </div>
       <BoletosSeleccionados
         boletosSeleccionados={boletosSeleccionados}
-        deseleccionarBoleto={deseleccionarBoleto}
+        deseleccionarBoleto={(id) => {
+          setBoletosSeleccionados((prev) => prev.filter((b) => b !== id));
+        }}
         precioTotal={calcularPrecioTotal().total}
         descuento={calcularPrecioTotal().descuento}
       />
@@ -176,6 +138,7 @@ export default function SorteoForm() {
         precioTotal={calcularPrecioTotal().total}
         confirmarCompra={confirmarCompra}
       />
+      <ToastContainer />
     </div>
   );
 }
