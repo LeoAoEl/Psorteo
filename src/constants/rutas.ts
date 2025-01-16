@@ -2,7 +2,7 @@ export const navbarRoutes = [
   { name: "Inicio", path: "/" },
   { name: "Ver sorteo", path: "/sorteo/" },
   { name: "Metodos de pago", path: "/pago/" },
-  { name: "Consula boletos", path: "/consulta/" },
+  { name: "Consulta boletos", path: "/consulta/" },
   // { name: "Casos de exito", path: "/exito/" },
   { name: "Nosotros", path: "/nosotros/" },
 ];
