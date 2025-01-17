@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import type { SorteoResponse, Boleto } from "../types/tickets";
+import type { SorteoResponse } from "../types/tickets";
 import { toast } from "react-toastify";
 
 interface Ticket {
