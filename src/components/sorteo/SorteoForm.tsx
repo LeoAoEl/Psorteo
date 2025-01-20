@@ -3,13 +3,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormularioUsuario from "./FormularioUser";
 import SelectorBoletos from "./SelectorBoletos";
-import { useApartarBoletos } from "@hooks/UseApartarBoletos";
+import { useApartarBoletos } from "@hooks/useApartarBoletos";
 import Ofertas from "./Ofertas";
 import ProcesoPago from "./Pago";
-import { useBoletos } from "@hooks/UseBoletos";
+import { useBoletos } from "@hooks/useBoletos";
 import BoletosSeleccionados from "./BoletosSeleccionados";
 import BuscadorBoletos from "./BuscadorBoletos";
 import { type DatosUsuario } from "../../types/tickets";
+import SeleccionAleatoria from "./GenerarAleatorio";
 
 const DESCUENTO_5 = 0.2;
 const DESCUENTO_10 = 0.4;
@@ -64,6 +65,22 @@ export default function Sorteo() {
     }
   };
 
+  const seleccionarBoletoAleatorio = (cantidad: number) => {
+    const boletosLibres = boletos.filter((b) => b.estado === "libre");
+    if (boletosLibres.length < cantidad) {
+      toast.error("No hay suficientes boletos libres");
+      return;
+    }
+    const seleccionados = boletosLibres
+      .sort(() => 0.5 - Math.random())
+      .slice(0, cantidad)
+      .map((b) => parseInt(b.numero_boleto));
+    setBoletosSeleccionados((prev) =>
+      [...new Set([...prev, ...seleccionados])].slice(0, 10)
+    );
+    toast.success(`Se han seleccionado ${cantidad} boletos aleatoriamente`);
+  };
+
   if (isLoading)
     return <div className="text-center text-slate-200">Cargando sorteo...</div>;
   if (!sorteoActivo)
@@ -87,17 +104,20 @@ export default function Sorteo() {
       </h1>
       <FormularioUsuario setDatosUsuario={setDatosUsuario} />
       <Ofertas />
-      <BuscadorBoletos
-        boletos={boletos.map((b) => ({
-          id: parseInt(b.numero_boleto),
-          estado: b.estado,
-        }))}
-        seleccionarBoleto={(id) => {
-          if (!boletosSeleccionados.includes(id)) {
-            setBoletosSeleccionados((prev) => [...prev, id]);
-          }
-        }}
-      />
+      <div className=" flex flex-col-reverse  md:flex-row mx-auto gap-4 mb-6">
+        <BuscadorBoletos
+          boletos={boletos.map((b) => ({
+            id: parseInt(b.numero_boleto),
+            estado: b.estado,
+          }))}
+          seleccionarBoleto={(id) => {
+            if (!boletosSeleccionados.includes(id)) {
+              setBoletosSeleccionados((prev) => [...prev, id]);
+            }
+          }}
+        />
+        <SeleccionAleatoria onSeleccionAleatoria={seleccionarBoletoAleatorio} />
+      </div>
       <SelectorBoletos
         boletos={boletosPaginados}
         boletosSeleccionados={boletosSeleccionados}

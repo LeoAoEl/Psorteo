@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Input } from "@nextui-org/react";
 
 interface BuscadorBoletosProps {
   boletos: { id: number; estado: "libre" | "apartado" | "confirmado" }[];
@@ -25,15 +26,17 @@ export default function BuscadorBoletos({
     .slice(0, 15); // Limita a 15 resultados
 
   return (
-    <div className="mb-6">
-      <input
-        type="text"
-        placeholder="Buscar número de boleto"
-        value={busqueda}
-        onChange={handleBusqueda}
-        className="w-full p-2 border rounded mb-2"
-        maxLength={5}
-      />
+    <div className="  w-full lg:w-2/3 items-center  justify-center">
+      <div>
+        <Input
+          type="text"
+          label="Buscar número de boleto"
+          value={busqueda}
+          onChange={handleBusqueda}
+          className="mb-2"
+          maxLength={5}
+        />
+      </div>
       {busqueda && (
         <div className="grid grid-cols-5 gap-2">
           {boletosFiltrados.map((boleto) => (

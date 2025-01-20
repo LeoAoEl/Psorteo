@@ -1,3 +1,5 @@
+import CreditCard from "@components/pago/CreditCard";
+import { Transferencia } from "@constants/pago/MetodoPago";
 interface ProcesoPagoProps {
   precioTotal: number;
   confirmarCompra: () => void;
@@ -15,14 +17,17 @@ export default function ProcesoPago({
           1. Realiza una transferencia o depósito a una de las siguientes
           cuentas:
         </p>
-        <ul className="list-disc list-inside mb-2">
-          <li>Banco A: 1234-5678-9012-3456</li>
-          <li>Banco B: 9876-5432-1098-7654</li>
-          <li>Banco C: 9236-1452-6058-2864</li>
-        </ul>
+        <div className="flex flex-col md:flex-row gap-8 items-center justify-evenly py-4">
+          {Transferencia.map((objeto) => (
+            <CreditCard {...objeto} />
+          ))}
+        </div>
         <p>
           2. Envía el comprobante de pago al siguiente número de WhatsApp: +52
           123 456 7890
+        </p>
+        <p className=" py-2">
+          3. Se enviará un correo de confrimación sobre tus boletos comprados
         </p>
       </div>
       <button

@@ -62,7 +62,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
           <img src={logoSrc} alt={logoAlt} className="h-10" />
         </div>
         <div
-          className={`${textColor} text-2xl md:text-3xl font-mono mb-6 cursor-pointer hover:text-opacity-70 transition-colors`}
+          className={`${textColor} text-xl md:text-2xl font-mono mb-6 cursor-pointer hover:text-opacity-70 transition-colors`}
           onClick={() => copyToClipboard(cardNumber, "Número de tarjeta")}
         >
           {cardNumber}
@@ -74,7 +74,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
                 Clave
               </div>
               <div
-                className={`${textColor} text-lg font-mono cursor-pointer hover:text-opacity-70 transition-colors`}
+                className={`${textColor} text-xs md:text-sm font-mono cursor-pointer hover:text-opacity-70 transition-colors`}
                 onClick={() => copyToClipboard(cardClave, "Clave")}
               >
                 {cardClave}
@@ -87,7 +87,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
                 TITULAR
               </div>
               <div
-                className={`${textColor} text-lg font-semibold cursor-pointer`}
+                className={`${textColor} text-xs md:text-sm font-semibold cursor-pointer`}
                 onClick={() =>
                   copyToClipboard(cardHolder, "Nombre del titular")
                 }

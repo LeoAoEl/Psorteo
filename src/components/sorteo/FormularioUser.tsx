@@ -1,4 +1,5 @@
 import React from "react";
+import { Input } from "@nextui-org/react";
 
 interface FormularioUsuarioProps {
   setDatosUsuario: React.Dispatch<
@@ -24,26 +25,24 @@ export default function FormularioUsuario({
         Datos del Participante
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <input
+        <Input
           type="text"
           name="nombre"
-          placeholder="Nombre Completo"
+          label="Nombre completo"
           onChange={handleChange}
-          className="border p-2 rounded"
+          className=""
         />
-        <input
+        <Input
           type="email"
           name="correo"
-          placeholder="Correo Electrónico"
+          label="Correo Electrónico"
           onChange={handleChange}
-          className="border p-2 rounded"
         />
-        <input
+        <Input
           type="tel"
           name="telefono"
-          placeholder="Teléfono"
+          label="Teléfono"
           onChange={handleChange}
-          className="border p-2 rounded"
         />
       </div>
     </div>
