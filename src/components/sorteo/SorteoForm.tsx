@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormularioUsuario from "./FormularioUser";
 import SelectorBoletos from "./SelectorBoletos";
-import { useApartarBoletos } from "@hooks/useApartarBoletos";
+import { useApartarBoletos } from "../../hooks/useApartarBoletos";
 import Ofertas from "./Ofertas";
 import ProcesoPago from "./Pago";
 import { useBoletos } from "@hooks/useBoletos";
