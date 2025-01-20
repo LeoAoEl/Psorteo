@@ -16,6 +16,7 @@ const DESCUENTO_5 = 0.2;
 const DESCUENTO_10 = 0.4;
 
 export default function Sorteo() {
+  const [isConfirm, setIsConfirm] = useState(false);
   const { boletos, sorteoActivo, isLoading, recargarBoletos } = useBoletos();
   const { apartarBoletos, isApartando } = useApartarBoletos();
   const [boletosSeleccionados, setBoletosSeleccionados] = useState<number[]>(
@@ -46,7 +47,11 @@ export default function Sorteo() {
 
   const confirmarCompra = async () => {
     if (boletosSeleccionados.length === 0) {
-      toast.error("Selecciona al menos un boleto");
+      toast.warning("Selecciona al menos un boleto", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
       return;
     }
     if (
@@ -54,14 +59,30 @@ export default function Sorteo() {
       !datosUsuario.correo ||
       !datosUsuario.telefono
     ) {
-      toast.error("Completa todos los datos del formulario");
+      toast.warning("Completa todos los datos del formulario", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
       return;
     }
 
+    setIsConfirm(true);
     const success = await apartarBoletos(boletosSeleccionados, datosUsuario);
+    setIsConfirm(false);
+
     if (success) {
       setBoletosSeleccionados([]);
       recargarBoletos();
+    } else {
+      toast.error(
+        "Error al apartar los boletos. Por favor, intenta de nuevo.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+        }
+      );
     }
   };
 
@@ -157,6 +178,7 @@ export default function Sorteo() {
       <ProcesoPago
         precioTotal={calcularPrecioTotal().total}
         confirmarCompra={confirmarCompra}
+        isConfirm={isConfirm}
       />
       <ToastContainer />
     </div>

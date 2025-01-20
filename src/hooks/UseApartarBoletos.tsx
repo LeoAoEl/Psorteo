@@ -47,8 +47,8 @@ export function useApartarBoletos() {
 
       toast.success("¡Boletos apartados con éxito!", {
         position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
       });
 
       return true;
