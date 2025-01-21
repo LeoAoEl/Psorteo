@@ -36,7 +36,7 @@ export function useApartarBoletos() {
 
     try {
       const response = await axios.put(
-        "http://localhost:5000/boletos/apartar",
+        "https://administradorsorteosback-production.up.railway.app/boletos/apartar",
         {
           ids: boletosIds,
           nombre: datosUsuario.nombre,

@@ -13,7 +13,7 @@ export function useBoletos() {
   const fetchBoletos = async () => {
     try {
       const response = await axios.get<SorteoResponse>(
-        "http://localhost:5000/sorteos/activo"
+        "https://administradorsorteosback-production.up.railway.app/sorteos/activo"
       );
       // TODO: Filtrar boletos: Solo Libres y Confirmados
       // const boletosFiltrados = response.data.boletos.filter(

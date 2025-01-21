@@ -33,7 +33,7 @@ export function useBoletos() {
     setIsLoading(true);
     try {
       const response = await axios.get<Ticket[]>(
-        `http://localhost:5000/boletos/correo/${correo}`
+        `https://administradorsorteosback-production.up.railway.app/boletos/correo/${correo}`
       );
 
       setBoletos(response.data);
