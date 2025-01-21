@@ -8,8 +8,8 @@ export const navbarRoutes = [
 ];
 
 export const socialLinks = [
-  { name: "Facebook Sorteo el Nevado", url: "#", icon: "facebook" },
-  { name: "instagram Sorteo el Nevado", url: "#", icon: "instagram" },
+  { name: "Facebook Sorteos el nevado", url: "#", icon: "facebook" },
+  { name: "instagram Sorteos el nevado", url: "#", icon: "instagram" },
 ];
 
 export const whatsappLines = [
