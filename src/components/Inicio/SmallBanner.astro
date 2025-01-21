@@ -1,14 +1,25 @@
 ---
+interface Sorteo {
+  isActive: number;
+  nombre: string;
+  descripcion: string;
+}
 
+const API_URL =
+  "https://administradorsorteosback-production.up.railway.app/sorteos/";
+const response = await fetch(API_URL);
+const sorteos = await response.json();
+
+const sorteoActivo = sorteos.find((sorteo: Sorteo) => sorteo.isActive === 1);
 ---
 
 <div
   class="w-full h-20 md:h-24 bg-gradient-to-r from-primary via-secondary to-primary flex items-center justify-center text-center"
 >
   <div class="text-slate-800 font-bold text-lg md:text-2xl prose-2xl">
-    GRAN PRIMERA EDICIÓN #1
+    {sorteoActivo.nombre}
     <div class="text-sm md:text-lg font-normal text-detalle prose-2xl">
-      DESDE $5 MXN
+      {sorteoActivo.descripcion}
     </div>
   </div>
 </div>

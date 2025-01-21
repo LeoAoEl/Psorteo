@@ -27,7 +27,7 @@ export function useApartarBoletos() {
       toast.error("Completa todos los datos del formulario", {
         position: "bottom-right",
         autoClose: 3000,
-        hideProgressBar: false,
+        hideProgressBar: true,
       });
       return false;
     }
@@ -47,7 +47,7 @@ export function useApartarBoletos() {
 
       toast.success("¡Boletos apartados con éxito!", {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: true,
       });
 
