@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-const { nextui, colors } = require("@nextui-org/react");
+const { heroui, colors } = require("@heroui/react");
 
 export default {
   content: [
     "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -17,5 +17,5 @@ export default {
       },
     },
   },
-  plugins: [nextui(), require("@tailwindcss/typography")],
+  plugins: [heroui(), require("@tailwindcss/typography")],
 };

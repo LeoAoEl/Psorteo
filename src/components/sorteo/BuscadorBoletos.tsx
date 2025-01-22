@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 
 interface BuscadorBoletosProps {
   boletos: { id: number; estado: "libre" | "apartado" | "confirmado" }[];

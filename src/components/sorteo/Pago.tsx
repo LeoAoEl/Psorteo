@@ -1,6 +1,6 @@
 import CreditCard from "@components/pago/CreditCard";
 import { Transferencia } from "@constants/pago/MetodoPago";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 interface ProcesoPagoProps {
   precioTotal: number;
   confirmarCompra: () => void;
