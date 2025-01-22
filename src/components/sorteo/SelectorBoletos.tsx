@@ -22,6 +22,7 @@ export default function SelectorBoletos({
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
+        draggable: true,
       });
     }
   };

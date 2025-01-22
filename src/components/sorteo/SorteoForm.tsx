@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { useState, useCallback } from "react";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormularioUsuario from "./FormularioUser";
 import SelectorBoletos from "./SelectorBoletos";
@@ -30,6 +30,7 @@ export default function Sorteo() {
   const [paginaActual, setPaginaActual] = useState(1);
   const boletosPerPage = 100;
 
+  //Función calcular precio total
   const calcularPrecioTotal = () => {
     if (!sorteoActivo) return { total: 0, descuento: 0 };
     const cantidad = boletosSeleccionados.length;
@@ -45,12 +46,14 @@ export default function Sorteo() {
     return { total: precioBase - descuento, descuento };
   };
 
+  //Función confirmar compra
   const confirmarCompra = async () => {
     if (boletosSeleccionados.length === 0) {
       toast.warning("Selecciona al menos un boleto", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
+        draggable: true,
       });
       return;
     }
@@ -63,6 +66,7 @@ export default function Sorteo() {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
+        draggable: true,
       });
       return;
     }
@@ -81,26 +85,52 @@ export default function Sorteo() {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
+          draggable: true,
         }
       );
     }
   };
 
-  const seleccionarBoletoAleatorio = (cantidad: number) => {
-    const boletosLibres = boletos.filter((b) => b.estado === "libre");
-    if (boletosLibres.length < cantidad) {
-      toast.error("No hay suficientes boletos libres");
-      return;
-    }
-    const seleccionados = boletosLibres
-      .sort(() => 0.5 - Math.random())
-      .slice(0, cantidad)
-      .map((b) => parseInt(b.numero_boleto));
-    setBoletosSeleccionados((prev) =>
-      [...new Set([...prev, ...seleccionados])].slice(0, 10)
-    );
-    toast.success(`Se han seleccionado ${cantidad} boletos aleatoriamente`);
-  };
+  //Función generar boletos aleatorios
+  const seleccionarBoletoAleatorio = useCallback(
+    (cantidad: number) => {
+      const boletosLibres = boletos.filter((b) => b.estado === "libre");
+
+      if (boletosLibres.length < cantidad) {
+        toast.dismiss("seleccionAleatoria");
+        toast.error("No hay suficientes boletos libres", {
+          position: "top-right",
+          autoClose: 500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          pauseOnFocusLoss: false,
+          draggable: true,
+          toastId: "seleccionAleatoria",
+        });
+        return;
+      }
+
+      const seleccionados = boletosLibres
+        .sort(() => 0.5 - Math.random())
+        .slice(0, cantidad)
+        .map((b) => parseInt(b.numero_boleto));
+      setBoletosSeleccionados(seleccionados);
+
+      toast.dismiss("seleccionAleatoria");
+      toast.success(`Se han seleccionado ${cantidad} boletos aleatoriamente`, {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        toastId: "seleccionAleatoria",
+      });
+    },
+    [boletos]
+  );
 
   if (isLoading)
     return <div className="text-center text-slate-200">Cargando sorteo...</div>;
