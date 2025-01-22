@@ -15,6 +15,7 @@
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
       "@constants/*": ["src/constants/*"]
-    }
+    },
+    "strictNullChecks": true
   }
 }
