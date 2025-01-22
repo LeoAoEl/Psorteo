@@ -10,7 +10,7 @@ interface Ticket {
   nombre: string;
 }
 
-export function useBoletos() {
+export default function useBoletos() {
   const [boletos, setBoletos] = useState<Ticket[]>([]);
   const [sorteoActivo, setSorteoActivo] = useState<
     SorteoResponse["sorteo"] | null

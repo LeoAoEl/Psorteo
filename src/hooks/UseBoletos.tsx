@@ -53,6 +53,6 @@ export function useBoletos() {
     boletos,
     sorteoActivo,
     isLoading,
-    recargarBoletos: fetchBoletos,
+    recargarBoletos: fetchBoletos, // Renombrar fetchBoletos como recargarBoletos
   };
 }

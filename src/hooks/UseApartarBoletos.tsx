@@ -3,7 +3,7 @@ import axios from "axios";
 import { type DatosUsuario } from "../types/tickets";
 import { toast } from "react-toastify";
 
-export function useApartarBoletos() {
+export default function useApartarBoletos() {
   const [isApartando, setIsApartando] = useState(false);
 
   const apartarBoletos = async (
