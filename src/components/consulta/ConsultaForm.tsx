@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBoletos } from "@hooks/useConsultaBoletos";
+import useBoletos from "@hooks/useConsultaBoletos";
 
 import {
   Button,
