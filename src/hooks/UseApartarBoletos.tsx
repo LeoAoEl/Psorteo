@@ -8,7 +8,8 @@ export default function useApartarBoletos() {
 
   const apartarBoletos = async (
     boletosIds: number[],
-    datosUsuario: DatosUsuario
+    datosUsuario: DatosUsuario,
+    total: String
   ) => {
     if (boletosIds.length === 0) {
       toast.error("Selecciona al menos un boleto", {
@@ -43,14 +44,16 @@ export default function useApartarBoletos() {
           nombre: datosUsuario.nombre,
           celular: datosUsuario.telefono,
           correo: datosUsuario.correo,
+          total: total,
         }
       );
+      alert("¡Boletos apartados con éxito!");
 
-      toast.success("¡Boletos apartados con éxito!", {
+      /* toast.success("¡Boletos apartados con éxito!", {
         position: "bottom-right",
         autoClose: 1000,
         hideProgressBar: true,
-      });
+      }); */
 
       return true;
     } catch (err) {

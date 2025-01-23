@@ -72,7 +72,11 @@ export default function Sorteo() {
     }
 
     setIsConfirm(true);
-    const success = await apartarBoletos(boletosSeleccionados, datosUsuario);
+    const success = await apartarBoletos(
+      boletosSeleccionados,
+      datosUsuario,
+      calcularPrecioTotal().total.toString()
+    );
     setIsConfirm(false);
 
     if (success) {
