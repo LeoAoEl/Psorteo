@@ -143,7 +143,8 @@ export default function Sorteo() {
   const boletosPaginados = boletos
     .slice((paginaActual - 1) * boletosPerPage, paginaActual * boletosPerPage)
     .map((boleto) => ({
-      id: parseInt(boleto.numero_boleto),
+      id: boleto.ID_BOLETO,
+      numero: boleto.numero_boleto,
       estado: boleto.estado,
     }));
 
@@ -156,26 +157,33 @@ export default function Sorteo() {
       <Ofertas />
       <div className=" flex flex-col-reverse  md:flex-row mx-auto gap-4 mb-6">
         <BuscadorBoletos
-          boletos={boletos.map((b) => ({
-            id: parseInt(b.numero_boleto),
+          boletos={boletosPaginados.map((b) => ({
+            id: b.id,
+            numero: b.numero,
             estado: b.estado,
           }))}
           seleccionarBoleto={(id) => {
             if (!boletosSeleccionados.includes(id)) {
-              setBoletosSeleccionados((prev) => [...prev, id]);
+              setBoletosSeleccionados((prev) => [...prev, id]); // Aquí trabajas con ID_BOLETO
             }
           }}
         />
+
         <SeleccionAleatoria
           onSeleccionAleatoria={seleccionarBoletoAleatorio}
           mensaje={mensaje}
         />
       </div>
       <SelectorBoletos
-        boletos={boletosPaginados}
+        boletos={boletosPaginados.map((b) => ({
+          id: b.id, // ID_BOLETO
+          numero: b.numero, // numero_boleto
+          estado: b.estado,
+        }))}
         boletosSeleccionados={boletosSeleccionados}
         setBoletosSeleccionados={setBoletosSeleccionados}
       />
+
       <div className="flex justify-center mt-4 mb-6">
         <button
           onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}

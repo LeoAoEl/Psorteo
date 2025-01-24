@@ -9,7 +9,7 @@ export default function useApartarBoletos() {
   const apartarBoletos = async (
     boletosIds: number[],
     datosUsuario: DatosUsuario,
-    total: String
+    total: string
   ) => {
     if (boletosIds.length === 0) {
       toast.error("Selecciona al menos un boleto", {

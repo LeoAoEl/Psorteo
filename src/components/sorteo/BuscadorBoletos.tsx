@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Input } from "@heroui/react";
 
 interface BuscadorBoletosProps {
-  boletos: { id: number; estado: "libre" | "apartado" | "confirmado" }[];
+  boletos: {
+    id: number;
+    numero: string;
+    estado: "libre" | "apartado" | "confirmado";
+  }[];
   seleccionarBoleto: (id: number) => void;
 }
 
@@ -13,20 +17,19 @@ export default function BuscadorBoletos({
   const [busqueda, setBusqueda] = useState("");
 
   const handleBusqueda = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ""); // Solo permite números
+    const value = e.target.value.replace(/\D/g, "");
+
     setBusqueda(value);
   };
 
   const boletosFiltrados = boletos
     .filter(
-      (boleto) =>
-        boleto.id.toString().padStart(5, "0").includes(busqueda) &&
-        boleto.estado === "libre"
+      (boleto) => boleto.numero.includes(busqueda) && boleto.estado === "libre"
     )
     .slice(0, 15); // Limita a 15 resultados
 
   return (
-    <div className="  w-full lg:w-2/3 items-center  justify-center">
+    <div className="w-full lg:w-2/3 items-center justify-center">
       <div>
         <Input
           type="text"
@@ -45,7 +48,7 @@ export default function BuscadorBoletos({
               onClick={() => seleccionarBoleto(boleto.id)}
               className="bg-green-200 p-2 rounded hover:bg-green-300"
             >
-              {boleto.id.toString().padStart(5, "0")}
+              {boleto.numero} {/* Muestra el `numero` en los resultados */}
             </button>
           ))}
         </div>
