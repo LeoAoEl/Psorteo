@@ -19,6 +19,7 @@ export function useBoletos() {
       // const boletosFiltrados = response.data.boletos.filter(
       //   (boleto) => boleto.estado === "libre" || boleto.estado === "confirmado"
       // );
+
       setBoletos(response.data.boletos);
       setSorteoActivo(response.data.sorteo);
     } catch (err) {

@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FormularioUsuario from "./FormularioUser";
 import SelectorBoletos from "./SelectorBoletos";
 import { useBoletos } from "@hooks/useBoletos";
-import useApartarBoletos from "@hooks/useApartarBoletos";
+import useApartarBoletos from "@hooks/UseApartarBoletos";
 import Ofertas from "./Ofertas";
 import ProcesoPago from "./Pago";
 import BoletosSeleccionados from "./BoletosSeleccionados";
@@ -96,22 +96,22 @@ export default function Sorteo() {
   };
 
   //Función generar boletos aleatorios
+  const [mensaje, setMensaje] = useState<{
+    tipo: "success" | "error";
+    texto: string;
+  } | null>(null);
   const seleccionarBoletoAleatorio = useCallback(
     (cantidad: number) => {
       const boletosLibres = boletos.filter((b) => b.estado === "libre");
 
       if (boletosLibres.length < cantidad) {
-        toast.dismiss("seleccionAleatoria");
-        toast.error("No hay suficientes boletos libres", {
-          position: "top-right",
-          autoClose: 500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          pauseOnFocusLoss: false,
-          draggable: true,
-          toastId: "seleccionAleatoria",
+        setMensaje({
+          tipo: "error",
+          texto: "No hay suficientes boletos libres",
         });
+
+        // Ocultar mensaje después de 5 segundos
+        setTimeout(() => setMensaje(null), 3000);
         return;
       }
 
@@ -121,17 +121,12 @@ export default function Sorteo() {
         .map((b) => parseInt(b.numero_boleto));
       setBoletosSeleccionados(seleccionados);
 
-      toast.dismiss("seleccionAleatoria");
-      toast.success(`Se han seleccionado ${cantidad} boletos aleatoriamente`, {
-        position: "top-right",
-        autoClose: 500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-        draggable: true,
-        toastId: "seleccionAleatoria",
+      setMensaje({
+        tipo: "success",
+        texto: `Se han seleccionado ${cantidad} boletos aleatoriamente`,
       });
+
+      setTimeout(() => setMensaje(null), 3000);
     },
     [boletos]
   );
@@ -171,7 +166,10 @@ export default function Sorteo() {
             }
           }}
         />
-        <SeleccionAleatoria onSeleccionAleatoria={seleccionarBoletoAleatorio} />
+        <SeleccionAleatoria
+          onSeleccionAleatoria={seleccionarBoletoAleatorio}
+          mensaje={mensaje}
+        />
       </div>
       <SelectorBoletos
         boletos={boletosPaginados}
