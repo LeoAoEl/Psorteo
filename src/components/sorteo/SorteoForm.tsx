@@ -100,6 +100,7 @@ export default function Sorteo() {
     tipo: "success" | "error";
     texto: string;
   } | null>(null);
+
   const seleccionarBoletoAleatorio = useCallback(
     (cantidad: number) => {
       const boletosLibres = boletos.filter((b) => b.estado === "libre");
@@ -110,15 +111,15 @@ export default function Sorteo() {
           texto: "No hay suficientes boletos libres",
         });
 
-        // Ocultar mensaje después de 5 segundos
+        // Ocultar mensaje después de 3 segundos
         setTimeout(() => setMensaje(null), 3000);
         return;
       }
 
       const seleccionados = boletosLibres
+        .map((b) => b.ID_BOLETO)
         .sort(() => 0.5 - Math.random())
-        .slice(0, cantidad)
-        .map((b) => parseInt(b.numero_boleto));
+        .slice(0, cantidad);
       setBoletosSeleccionados(seleccionados);
 
       setMensaje({
