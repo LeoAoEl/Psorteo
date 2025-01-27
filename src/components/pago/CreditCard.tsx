@@ -2,7 +2,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface CreditCardProps {
-  type: "bbva" | "santander" | "coppel" | string;
+  type: "bbva" | "santander" | "coppel" | "banorte" | string;
   cardNumber: string;
   cardClave?: string;
   cardHolder?: string;
@@ -22,12 +22,14 @@ const CreditCard: React.FC<CreditCardProps> = ({
     bbva: "bg-blue-600",
     santander: "bg-white",
     coppel: "bg-[#ffe525]",
+    banorte: "bg-white",
   };
 
   const textColors: Record<string, string> = {
     bbva: "text-white",
     santander: "text-[#ff0000]",
     coppel: "text-[#235ba6]",
+    banorte: "text-[#ff0f4a]",
   };
 
   const bgColor = backgroundColors[type] || "bg-gray-600";
@@ -54,7 +56,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
 
   return (
     <div
-      className={`${bgColor} rounded-xl shadow-2xl p-6 relative overflow-hidden max-w-xl`}
+      className={`${bgColor} rounded-xl shadow-2xl p-6  relative overflow-hidden max-w-xl`}
     >
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-opacity-30 to-opacity-50"></div>
       <div className="relative z-10">
@@ -87,7 +89,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
                 TITULAR
               </div>
               <div
-                className={`${textColor} text-xs md:text-sm font-semibold cursor-pointer`}
+                className={`${textColor} text-xs md:text-xs md:ml-4 font-semibold cursor-pointer`}
                 onClick={() =>
                   copyToClipboard(cardHolder, "Nombre del titular")
                 }

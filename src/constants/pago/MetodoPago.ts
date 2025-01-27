@@ -4,15 +4,17 @@ const coppelLogo =
   "https://res.cloudinary.com/dk6h3pmlf/image/upload/v1735867001/coppeLogo_bdsqhi.avif";
 const SantaderLogo =
   "https://res.cloudinary.com/dk6h3pmlf/image/upload/v1735867001/SantanderLogo_eeq9o5.webp";
+const BanorteLogo =
+  "https://res.cloudinary.com/dk6h3pmlf/image/upload/v1737909812/Banorte-logo_mevezv.avif";
 
 export const Transferencia = [
   {
-    type: "bbva",
-    cardNumber: "4532 7568 9012 3456",
-    cardClave: "123124134",
-    cardHolder: "JUAN PÉREZ",
-    logoSrc: bbvaLogo,
-    logoAlt: "BBVA Logo",
+    type: "banorte",
+    cardNumber: "4189 1430 7516 3827",
+    cardClave: "072090012142102960",
+    cardHolder: "Esmeralda Rebolledo",
+    logoSrc: BanorteLogo,
+    logoAlt: "Banorte Logo",
   },
 
   {

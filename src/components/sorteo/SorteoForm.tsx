@@ -117,10 +117,11 @@ export default function Sorteo() {
       }
 
       const seleccionados = boletosLibres
-        .map((b) => b.ID_BOLETO)
         .sort(() => 0.5 - Math.random())
         .slice(0, cantidad);
-      setBoletosSeleccionados(seleccionados);
+
+      const selectedIds = new Set(seleccionados.map((b) => b.ID_BOLETO));
+      setBoletosSeleccionados([...selectedIds]);
 
       setMensaje({
         tipo: "success",
@@ -163,9 +164,9 @@ export default function Sorteo() {
             numero: b.numero,
             estado: b.estado,
           }))}
-          seleccionarBoleto={(id) => {
-            if (!boletosSeleccionados.includes(id)) {
-              setBoletosSeleccionados((prev) => [...prev, id]); // Aquí trabajas con ID_BOLETO
+          seleccionarBoleto={(numero) => {
+            if (!boletosSeleccionados.includes(numero)) {
+              setBoletosSeleccionados((prev) => [...prev, numero]);
             }
           }}
         />
@@ -175,10 +176,11 @@ export default function Sorteo() {
           mensaje={mensaje}
         />
       </div>
+
       <SelectorBoletos
         boletos={boletosPaginados.map((b) => ({
-          id: b.id, // ID_BOLETO
-          numero: b.numero, // numero_boleto
+          id: b.id,
+          numero: b.numero,
           estado: b.estado,
         }))}
         boletosSeleccionados={boletosSeleccionados}
@@ -210,8 +212,8 @@ export default function Sorteo() {
       </div>
       <BoletosSeleccionados
         boletosSeleccionados={boletosSeleccionados}
-        deseleccionarBoleto={(id) => {
-          setBoletosSeleccionados((prev) => prev.filter((b) => b !== id));
+        deseleccionarBoleto={(numero) => {
+          setBoletosSeleccionados((prev) => prev.filter((b) => b !== numero));
         }}
         precioTotal={calcularPrecioTotal().total}
         descuento={calcularPrecioTotal().descuento}

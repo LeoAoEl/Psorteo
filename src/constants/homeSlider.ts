@@ -1,6 +1,10 @@
 export const hero = [
   {
     imgSrc:
+      "https://res.cloudinary.com/dk6h3pmlf/image/upload/v1737996697/bills_bkjq5j.webp",
+  },
+  {
+    imgSrc:
       "https://res.cloudinary.com/dk6h3pmlf/image/upload/v1734620238/truckC_ivc1pb.avif",
   },
   {
