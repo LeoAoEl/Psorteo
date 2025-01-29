@@ -22,7 +22,7 @@ const HeroSwipper: React.FC<Props> = ({ slides }) => {
       pagination={{ clickable: true }}
       loop={true}
       effect="fade"
-      className="w-full h-[50vh] md:h-[75vh]   transition-all ease-in-out"
+      className="w-full h-[50vh] md:h-[75vh] transition-all ease-in-out"
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index} className="relative">
