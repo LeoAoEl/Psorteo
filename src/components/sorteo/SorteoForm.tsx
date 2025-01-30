@@ -32,18 +32,26 @@ export default function Sorteo() {
 
   //Función calcular precio total
   const calcularPrecioTotal = () => {
-    if (!sorteoActivo) return { total: 0, descuento: 0 };
+    if (!sorteoActivo) return { total: 0, descuento: 0, porcentaje: 0 };
+
     const cantidad = boletosSeleccionados.length;
-    const precioBase = cantidad * 5; // Precio fijo por boleto
+    const precioBase = cantidad * 5;
     let descuento = 0;
+    let porcentaje = 0;
 
     if (cantidad >= 10) {
+      porcentaje = 40;
       descuento = precioBase * DESCUENTO_10;
     } else if (cantidad >= 5) {
+      porcentaje = 20;
       descuento = precioBase * DESCUENTO_5;
     }
 
-    return { total: precioBase - descuento, descuento };
+    return {
+      total: precioBase - descuento,
+      descuento,
+      porcentaje, // Nuevo campo
+    };
   };
 
   //Función confirmar compra
@@ -110,8 +118,6 @@ export default function Sorteo() {
           tipo: "error",
           texto: "No hay suficientes boletos libres",
         });
-
-        // Ocultar mensaje después de 3 segundos
         setTimeout(() => setMensaje(null), 3000);
         return;
       }
@@ -120,8 +126,9 @@ export default function Sorteo() {
         .sort(() => 0.5 - Math.random())
         .slice(0, cantidad);
 
+      // Seleccionar IDs en lugar de números de boleto
       const selectedIds = new Set(seleccionados.map((b) => b.ID_BOLETO));
-      setBoletosSeleccionados([...selectedIds]);
+      setBoletosSeleccionados([...selectedIds]); // Almacena IDs
 
       setMensaje({
         tipo: "success",
@@ -176,7 +183,6 @@ export default function Sorteo() {
           mensaje={mensaje}
         />
       </div>
-
       <SelectorBoletos
         boletos={boletosPaginados.map((b) => ({
           id: b.id,
@@ -186,7 +192,6 @@ export default function Sorteo() {
         boletosSeleccionados={boletosSeleccionados}
         setBoletosSeleccionados={setBoletosSeleccionados}
       />
-
       <div className="flex justify-center mt-4 mb-6">
         <button
           onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
@@ -210,13 +215,16 @@ export default function Sorteo() {
           Siguiente
         </button>
       </div>
+
       <BoletosSeleccionados
         boletosSeleccionados={boletosSeleccionados}
-        deseleccionarBoleto={(numero) => {
-          setBoletosSeleccionados((prev) => prev.filter((b) => b !== numero));
+        deseleccionarBoleto={(id) => {
+          setBoletosSeleccionados((prev) => prev.filter((b) => b !== id));
         }}
         precioTotal={calcularPrecioTotal().total}
         descuento={calcularPrecioTotal().descuento}
+        porcentajeDescuento={calcularPrecioTotal().porcentaje} // Pasa el porcentaje
+        boletos={boletos}
       />
       <ProcesoPago
         precioTotal={calcularPrecioTotal().total}

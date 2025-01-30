@@ -1,53 +1,77 @@
-interface BoletosSeleccionadosProps {
+import React from "react";
+import type { Boleto } from "../../types/tickets";
+
+interface Props {
   boletosSeleccionados: number[];
   deseleccionarBoleto: (id: number) => void;
   precioTotal: number;
   descuento: number;
+  boletos: Boleto[];
+  porcentajeDescuento: number; // Nueva prop
 }
 
-export default function BoletosSeleccionados({
+const BoletosSeleccionados: React.FC<Props> = ({
   boletosSeleccionados,
   deseleccionarBoleto,
   precioTotal,
   descuento,
-}: BoletosSeleccionadosProps) {
-  const cantidadBoletos = boletosSeleccionados.length;
-  let mensajeDescuento = "";
-
-  if (cantidadBoletos >= 10) {
-    mensajeDescuento = "Se está aplicando un descuento del 40%";
-  } else if (cantidadBoletos >= 5) {
-    mensajeDescuento = "Se está aplicando un descuento del 20%";
-  }
+  boletos,
+  porcentajeDescuento, // Recibe el porcentaje
+}) => {
+  const obtenerNumeroBoleto = (id: number) => {
+    const boleto = boletos.find((b) => b.ID_BOLETO === id);
+    return boleto ? boleto.numero_boleto.padStart(5, "0") : "N/A";
+  };
 
   return (
-    <div className="mb-6 bg-aFondo p-4 rounded text-slate-100">
-      <h2 className="text-xl font-semibold mb-2">Boletos Seleccionados</h2>
-      <div className="flex flex-wrap gap-2 mb-4">
+    <div className="bg-aFondo p-4 rounded-lg mb-4">
+      <h2 className="text-xl font-bold mb-2 text-slate-200">
+        Boletos Seleccionados
+      </h2>
+
+      <div className="grid grid-cols-5 gap-2 mb-4">
         {boletosSeleccionados.map((id) => (
-          <button
+          <div
             key={id}
-            onClick={() => deseleccionarBoleto(id)}
-            className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+            className="bg-slate-700 p-2 rounded flex justify-between items-center"
           >
-            {id.toString().padStart(5, "0")} ✕
-          </button>
+            <span className="text-slate-200">{obtenerNumeroBoleto(id)}</span>
+            <button
+              onClick={() => deseleccionarBoleto(id)}
+              className="text-red-400 hover:text-red-300 ml-2"
+            >
+              ✕
+            </button>
+          </div>
         ))}
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-        <div>
-          <p>Número de boletos: {cantidadBoletos}</p>
-          <p>Descuento aplicado: ${descuento.toFixed(2)} MXN</p>
-          {mensajeDescuento && (
-            <p className="text-sm text-green-600 mt-2">{mensajeDescuento}</p>
-          )}
+
+      <div className="space-y-2 text-slate-200">
+        <div className="flex justify-between">
+          <span>Número de boletos:</span>
+          <span>{boletosSeleccionados.length}</span>
         </div>
-        <div className="text-right mt-4 md:mt-0">
-          <p className="text-lg font-bold text-primary">
-            Total a pagar: ${precioTotal.toFixed(2)} MXN
-          </p>
+
+        <div className="flex justify-between">
+          <span>Descuento aplicado:</span>
+          <span className="text-green-400">${descuento.toFixed(2)} MXN</span>
+        </div>
+
+        {/* Nota de descuento */}
+        {porcentajeDescuento > 0 && (
+          <div className="text-sm text-slate-400 text-right">
+            ({porcentajeDescuento}% de descuento por compra de{" "}
+            {boletosSeleccionados.length} boletos)
+          </div>
+        )}
+
+        <div className="flex justify-between font-bold border-t pt-2">
+          <span>Total a pagar:</span>
+          <span className="text-primary">${precioTotal.toFixed(2)} MXN</span>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default BoletosSeleccionados;
