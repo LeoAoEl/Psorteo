@@ -50,7 +50,7 @@ export default function Sorteo() {
     return {
       total: precioBase - descuento,
       descuento,
-      porcentaje, // Nuevo campo
+      porcentaje,
     };
   };
 
@@ -128,7 +128,7 @@ export default function Sorteo() {
 
       // Seleccionar IDs en lugar de números de boleto
       const selectedIds = new Set(seleccionados.map((b) => b.ID_BOLETO));
-      setBoletosSeleccionados([...selectedIds]); // Almacena IDs
+      setBoletosSeleccionados([...selectedIds]);
 
       setMensaje({
         tipo: "success",
@@ -164,20 +164,19 @@ export default function Sorteo() {
       </h1>
       <FormularioUsuario setDatosUsuario={setDatosUsuario} />
       <Ofertas />
-      <div className=" flex flex-col-reverse  md:flex-row mx-auto gap-4 mb-6">
+      <div className=" flex flex-col-reverse md:flex-row mx-auto gap-4 mb-6 items-center justify-center">
         <BuscadorBoletos
-          boletos={boletosPaginados.map((b) => ({
-            id: b.id,
-            numero: b.numero,
+          boletos={boletos.map((b) => ({
+            id: b.ID_BOLETO,
+            numero: b.numero_boleto,
             estado: b.estado,
           }))}
-          seleccionarBoleto={(numero) => {
-            if (!boletosSeleccionados.includes(numero)) {
-              setBoletosSeleccionados((prev) => [...prev, numero]);
+          seleccionarBoleto={(id) => {
+            if (!boletosSeleccionados.includes(id)) {
+              setBoletosSeleccionados((prev) => [...prev, id]);
             }
           }}
         />
-
         <SeleccionAleatoria
           onSeleccionAleatoria={seleccionarBoletoAleatorio}
           mensaje={mensaje}

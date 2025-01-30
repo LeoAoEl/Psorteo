@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Input } from "@heroui/react";
 
 interface BuscadorBoletosProps {
@@ -16,17 +16,20 @@ export default function BuscadorBoletos({
 }: BuscadorBoletosProps) {
   const [busqueda, setBusqueda] = useState("");
 
+  // Filtra en TODOS los boletos (60k)
+  const boletosFiltrados = useMemo(() => {
+    return boletos
+      .filter(
+        (boleto) =>
+          boleto.numero.includes(busqueda) && boleto.estado === "libre"
+      )
+      .slice(0, 15);
+  }, [busqueda, boletos]);
+
   const handleBusqueda = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "");
-
     setBusqueda(value);
   };
-
-  const boletosFiltrados = boletos
-    .filter(
-      (boleto) => boleto.numero.includes(busqueda) && boleto.estado === "libre"
-    )
-    .slice(0, 15); // Limita a 15 resultados
 
   return (
     <div className="w-full lg:w-2/3 items-center justify-center">
@@ -48,7 +51,7 @@ export default function BuscadorBoletos({
               onClick={() => seleccionarBoleto(boleto.id)}
               className="bg-green-200 p-2 rounded hover:bg-green-300"
             >
-              {boleto.numero} {/* Muestra el `numero` en los resultados */}
+              {boleto.numero.padStart(5, "0")} {/* Formato 00001 */}
             </button>
           ))}
         </div>
