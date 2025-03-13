@@ -29,15 +29,6 @@ export function useBoletos() {
           autoClose: 3000,
           hideProgressBar: false,
         });
-      } else {
-        toast.error(
-          "Error al cargar los boletos. Por favor, intente más tarde.",
-          {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-          }
-        );
       }
       setBoletos([]);
       setSorteoActivo(null);

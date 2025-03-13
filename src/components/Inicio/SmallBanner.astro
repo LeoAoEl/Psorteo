@@ -1,27 +1,43 @@
 ---
+// Definir la interfaz de Sorteo
 interface Sorteo {
   isActive: number;
   nombre: string;
   descripcion: string;
 }
 
-// const API_URL =
-//   "https://administradorsorteosback-production.up.railway.app/sorteos/";
-// const response = await fetch(API_URL);
-// const sorteos = await response.json();
+const API_URL =
+  "https://administradorsorteosback-production.up.railway.app/sorteos/";
 
-// const sorteoActivo = sorteos.find((sorteo: Sorteo) => sorteo.isActive === 1);
+let sorteos: Sorteo[] = [];
+let sorteoActivo: Sorteo | undefined = undefined;
+
+try {
+  const response = await fetch(API_URL);
+
+  if (!response.ok) {
+    throw new Error(`Error en la API: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  sorteos = Array.isArray(data) ? data : data.sorteos || [];
+
+  sorteoActivo = sorteos.find((sorteo) => sorteo.isActive === 1);
+} catch (error) {
+  console.error("Error obteniendo los sorteos:", error);
+}
 ---
 
-<div
-  class="w-full h-20 md:h-24 bg-gradient-to-r from-primary via-secondary to-primary flex items-center justify-center text-center"
->
-  <div class="text-slate-800 font-bold text-lg md:text-2xl prose-2xl">
-    <!-- {sorteoActivo.nombre} -->
-    Primero Sorteo
-    <div class="text-sm md:text-lg font-normal text-detalle prose-2xl">
-      <!-- {sorteoActivo.descripcion} -->
-      #1
+{
+  sorteoActivo && (
+    <div class="w-full h-20 md:h-24 bg-gradient-to-r from-primary via-secondary to-primary flex items-center justify-center text-center">
+      <div class="text-slate-800 font-bold text-lg md:text-2xl prose-2xl">
+        {sorteoActivo.nombre}
+        <div class="text-sm md:text-lg font-normal text-detalle prose-2xl">
+          {sorteoActivo.descripcion}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  )
+}
